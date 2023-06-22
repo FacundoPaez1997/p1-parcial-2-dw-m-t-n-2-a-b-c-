@@ -1,0 +1,226 @@
+/* ----------------------------------- Contenido principal --------------------------------------- */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background: url("../img/fondo.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  font-family: 'Marvel', sans-serif;
+}
+
+.container {
+  margin: 15px auto;
+  padding: 20px;
+  background-color: rgba(221, 221, 221, 0.8);
+  box-shadow: 2px 2px 4px black;
+  max-width: 60%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* ----------------------------------- Textos --------------------------------------- */
+
+h1 {
+  display: none;
+}
+
+h2 {
+  font-size: 32pt;
+  font-family: 'Contrail One', cursive;
+}
+
+h3 {
+  font-size: 24pt;
+  font-family: 'Sedgwick Ave', cursive;
+}
+
+/* ----------------------------------- Productos --------------------------------------- */
+
+.product-list {
+  margin-bottom: 30px;
+  margin: auto;
+}
+
+.product-list h2 {
+  margin-bottom: 10px;
+}
+
+.product-list p {
+  font-size: 14pt;
+}
+
+.filter-button {
+  margin: 10px;
+}
+
+#product-list {
+  list-style: none;
+  padding: 0;
+}
+
+img {
+  width: 30%;
+  margin: 15px;
+  box-shadow: 2px 2px 4px black;
+  border: solid 5px aliceblue;
+}
+
+.col-md-8 {
+  width: 100%;
+}
+
+/* ----------------------------------- Carrito --------------------------------------- */
+
+.cart {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 200px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.cart h2 {
+  margin-bottom: 10px;
+}
+
+#cart-summary,
+#cart-total {
+  margin-bottom: 5px;
+}
+
+#show-cart-button {
+  width: 100%;
+}
+
+/* ----------------------------------- Modales --------------------------------------- */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 4px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* ----------------------------------- Footer --------------------------------------- */
+
+footer {
+  max-width: fit-content;
+  background-color: rgba(221, 221, 221, 0.8);
+  margin: auto;
+  box-shadow: 2px 2px 4px black;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-family: 'Sedgwick Ave', cursive;
+  font-size: 16pt;
+  text-align: left;
+  border-radius: 5px;
+}
+
+dl, ol, ul {
+  margin: 5px;
+}
+
+/* ----------------------------------- Propiedades Responsivas --------------------------------------- */
+
+/************* Tablet *************/
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    margin-top: 150px;
+  }
+
+  .col-md-8 {
+    width: 100%;
+  }
+
+.cart {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    background-color: hsla(0, 0%, 99%, 0.8);
+  }
+
+  .cart h2{
+    font-size: 20pt;
+    margin-bottom: 0px;
+  }
+
+  .modal-content {
+    width: 90%;
+    max-width: 400px;
+    margin: 10% auto;
+  }
+
+  footer{
+    max-width: 100%;
+  }
+}
+
+/************* Movil *************/
+@media (max-width: 576px) {
+  .container {
+    padding: 10px;
+  }
+
+  .filter-button {
+    margin: 5px;
+  }
+
+  h2 {
+    font-size: 28pt;
+  }
+
+  h3 {
+    font-size: 20pt;
+  }
+
+  img {
+    width: 150px;
+    margin: 10px;
+  }
+}
