@@ -1,4 +1,4 @@
-  //---------------- Datos ----------------//
+//---------------- Datos ----------------//
 
 document.addEventListener("DOMContentLoaded", function() {
   const products = [
@@ -45,30 +45,53 @@ document.addEventListener("DOMContentLoaded", function() {
   //---------------- Renderizar la lista de productos ----------------//
 
   function renderProductList(category = 'All') {
-    productList.innerHTML = '';
+    while (productList.firstChild) {
+      productList.firstChild.remove();
+    }
 
     const filteredProducts = category === 'All' ? products : products.filter(product => product.category === category);
 
     filteredProducts.forEach((product, index) => {
       const listItem = document.createElement('li');
-      listItem.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" width="100">
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
-        <p>Precio: $${product.price.toFixed(2)}</p>
-        <button class="btn btn-primary view-product-button" data-index="${index}">Ver Detalles</button>
-        <button class="btn btn-success add-to-cart-button" data-index="${index}">Agregar al Carrito</button>
-      `;
+      const productImage = document.createElement('img');
+      const productName = document.createElement('h3');
+      const productDescription = document.createElement('p');
+      const productPrice = document.createElement('p');
+      const viewProductButton = document.createElement('button');
+      const addToCartButton = document.createElement('button');
 
-      const viewProductButton = listItem.querySelector('.view-product-button');
+      productImage.src = product.image;
+      productImage.alt = product.name;
+      productImage.width = '100';
+
+      productName.textContent = product.name;
+
+      productDescription.textContent = product.description;
+
+      productPrice.textContent = `Precio: $${product.price.toFixed(2)}`;
+
+      viewProductButton.className = 'btn btn-primary view-product-button';
+      viewProductButton.dataset.index = index;
+      viewProductButton.textContent = 'Ver Detalles';
+
+      addToCartButton.className = 'btn btn-success add-to-cart-button';
+      addToCartButton.dataset.index = index;
+      addToCartButton.textContent = 'Agregar al Carrito';
+
       viewProductButton.addEventListener('click', () => {
         openProductModal(index);
       });
 
-      const addToCartButton = listItem.querySelector('.add-to-cart-button');
       addToCartButton.addEventListener('click', () => {
         addToCart(index);
       });
+
+      listItem.appendChild(productImage);
+      listItem.appendChild(productName);
+      listItem.appendChild(productDescription);
+      listItem.appendChild(productPrice);
+      listItem.appendChild(viewProductButton);
+      listItem.appendChild(addToCartButton);
 
       productList.appendChild(listItem);
     });
@@ -119,20 +142,31 @@ document.addEventListener("DOMContentLoaded", function() {
   //---------------- Abrir el modal del carrito ----------------//
 
   function openCartModal() {
-    cartProductList.innerHTML = '';
+    while (cartProductList.firstChild) {
+      cartProductList.firstChild.remove();
+    }
 
     cartProducts.forEach((product, index) => {
       const listItem = document.createElement('li');
-      listItem.innerHTML = `
-        <h3>${product.name}</h3>
-        <p>Precio: $${product.price.toFixed(2)}</p>
-        <button class="btn btn-danger remove-from-cart-button" data-index="${index}">Eliminar</button>
-      `;
+      const productName = document.createElement('h3');
+      const productPrice = document.createElement('p');
+      const removeFromCartButton = document.createElement('button');
 
-      const removeFromCartButton = listItem.querySelector('.remove-from-cart-button');
+      productName.textContent = product.name;
+
+      productPrice.textContent = `Precio: $${product.price.toFixed(2)}`;
+
+      removeFromCartButton.className = 'btn btn-danger remove-from-cart-button';
+      removeFromCartButton.dataset.index = index;
+      removeFromCartButton.textContent = 'Eliminar';
+
       removeFromCartButton.addEventListener('click', () => {
         removeFromCart(index);
       });
+
+      listItem.appendChild(productName);
+      listItem.appendChild(productPrice);
+      listItem.appendChild(removeFromCartButton);
 
       cartProductList.appendChild(listItem);
     });
@@ -148,19 +182,13 @@ document.addEventListener("DOMContentLoaded", function() {
     cartModal.style.display = 'none';
   }
 
-//---------------- Agregar un producto ----------------//
+  //---------------- Agregar un producto ----------------//
 
-function addToCart(index) {
-  const product = products[index];
-  const isProductInCart = cartProducts.some((cartProduct) => cartProduct.name === product.name);
-
-  if (!isProductInCart) {
+  function addToCart(index) {
+    const product = products[index];
     cartProducts.push(product);
     updateCartSummary();
-  } else {
-    alert('¡Ya has agregado este juego al carrito!');
-  }
-}
+  }  
 
   //---------------- Eliminar un producto ----------------//
 
@@ -183,7 +211,7 @@ function addToCart(index) {
   addToCartModalButton.addEventListener('click', () => {
     const index = parseInt(addToCartModalButton.dataset.index);
     addToCart(index);
-    closeProductModal();
+    updateCartSummary();
   });
 
   showCartButton.addEventListener('click', openCartModal);
@@ -199,4 +227,4 @@ function addToCart(index) {
   initializePage();
 });
 
-//----------------  ----------------//
+ //--------------------------------//
